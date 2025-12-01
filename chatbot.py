@@ -1,13 +1,15 @@
 import json
 import os
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 import google.generativeai as genai
 from dotenv import load_dotenv
 import chromadb
 from sentence_transformers import SentenceTransformer
+from rank_bm25 import BM25Okapi
+from pythainlp.tokenize import word_tokenize
 
-class VectorKnowledgeBase:
-    """Class to handle vector database-based knowledge retrieval"""
+class HybridKnowledgeBase:
+    """Class to handle hybrid retrieval (BM25 + Vector Search)"""
 
     def __init__(self, persist_directory: str = "./chroma_db", collection_name: str = "chatbot_knowledge"):
         self.persist_directory = persist_directory
@@ -30,16 +32,59 @@ class VectorKnowledgeBase:
             print(f"❌ Error loading collection: {e}")
             raise
 
-    def search_knowledge(self, query: str, n_results: int = 5) -> List[Dict[str, str]]:
-        """
-        Search for relevant knowledge using vector similarity
+        # Load all documents for BM25
+        print("📝 Loading documents for BM25 indexing...")
+        self._load_documents_for_bm25()
 
+    def _load_documents_for_bm25(self):
+        """Load all documents and create BM25 index"""
+        # Get all documents from ChromaDB
+        all_docs = self.collection.get()
+        self.documents = all_docs['documents']
+        self.doc_ids = all_docs['ids']
+        
+        # Tokenize documents for BM25 using Thai word tokenizer
+        print("🔤 Tokenizing documents for BM25...")
+        self.tokenized_docs = [word_tokenize(doc, engine='newmm') for doc in self.documents]
+        
+        # Create BM25 index
+        print("🔍 Building BM25 index...")
+        self.bm25 = BM25Okapi(self.tokenized_docs)
+        print(f"✅ BM25 index ready with {len(self.documents)} documents")
+
+    def _bm25_search(self, query: str, top_k: int = 10) -> List[Tuple[int, float]]:
+        """
+        Perform BM25 keyword search
+        
         Args:
             query: User's question
-            n_results: Number of top results to return
-
+            top_k: Number of top results to return
+            
         Returns:
-            List of relevant knowledge items with text and relevance score
+            List of (doc_index, score) tuples
+        """
+        # Tokenize query using Thai tokenizer
+        tokenized_query = word_tokenize(query, engine='newmm')
+        
+        # Get BM25 scores
+        bm25_scores = self.bm25.get_scores(tokenized_query)
+        
+        # Get top-k results with indices
+        top_indices = bm25_scores.argsort()[-top_k:][::-1]
+        results = [(idx, bm25_scores[idx]) for idx in top_indices if bm25_scores[idx] > 0]
+        
+        return results
+    
+    def _vector_search(self, query: str, top_k: int = 10) -> List[Tuple[int, float]]:
+        """
+        Perform vector similarity search
+        
+        Args:
+            query: User's question
+            top_k: Number of top results to return
+            
+        Returns:
+            List of (doc_index, similarity_score) tuples
         """
         # Generate embedding for the query
         query_embedding = self.model.encode([query])
@@ -47,19 +92,87 @@ class VectorKnowledgeBase:
         # Search in vector database
         results = self.collection.query(
             query_embeddings=query_embedding.tolist(),
-            n_results=n_results
+            n_results=top_k
         )
 
+        # Convert to (index, score) format
+        # ChromaDB returns distance (lower is better), convert to similarity (higher is better)
+        vector_results = []
+        if results['documents'][0]:
+            for doc_text, distance in zip(results['documents'][0], results['distances'][0]):
+                # Find document index
+                try:
+                    doc_idx = self.documents.index(doc_text)
+                    # Convert distance to similarity score (1 - normalized_distance)
+                    similarity = 1 / (1 + distance)  # Higher score = more similar
+                    vector_results.append((doc_idx, similarity))
+                except ValueError:
+                    continue
+        
+        return vector_results
+    
+    def search_knowledge(self, query: str, n_results: int = 5, 
+                        bm25_weight: float = 0.4, vector_weight: float = 0.6) -> List[Dict[str, str]]:
+        """
+        Hybrid search combining BM25 and vector similarity
+        
+        Args:
+            query: User's question
+            n_results: Number of top results to return
+            bm25_weight: Weight for BM25 scores (default 0.4)
+            vector_weight: Weight for vector scores (default 0.6)
+            
+        Returns:
+            List of relevant knowledge items with text and relevance score
+        """
+        # Perform both searches
+        bm25_results = self._bm25_search(query, top_k=15)
+        vector_results = self._vector_search(query, top_k=15)
+        
+        # Normalize scores for both methods
+        def normalize_scores(results: List[Tuple[int, float]]) -> Dict[int, float]:
+            if not results:
+                return {}
+            scores = [score for _, score in results]
+            min_score = min(scores)
+            max_score = max(scores)
+            
+            if max_score == min_score:
+                return {idx: 1.0 for idx, _ in results}
+            
+            return {
+                idx: (score - min_score) / (max_score - min_score)
+                for idx, score in results
+            }
+        
+        bm25_normalized = normalize_scores(bm25_results)
+        vector_normalized = normalize_scores(vector_results)
+        
+        # Combine scores using weighted sum
+        combined_scores = {}
+        all_indices = set(bm25_normalized.keys()) | set(vector_normalized.keys())
+        
+        for idx in all_indices:
+            bm25_score = bm25_normalized.get(idx, 0.0)
+            vector_score = vector_normalized.get(idx, 0.0)
+            
+            # Weighted combination
+            combined_scores[idx] = (bm25_weight * bm25_score) + (vector_weight * vector_score)
+        
+        # Sort by combined score and get top results
+        sorted_results = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:n_results]
+        
         # Format results
         relevant_knowledge = []
-        if results['documents'][0]:
-            for i, (doc, distance) in enumerate(zip(results['documents'][0], results['distances'][0])):
-                relevant_knowledge.append({
-                    'text': doc,
-                    'distance': distance,
-                    'rank': i + 1
-                })
-
+        for rank, (idx, score) in enumerate(sorted_results, 1):
+            relevant_knowledge.append({
+                'text': self.documents[idx],
+                'score': score,
+                'rank': rank,
+                'bm25_score': bm25_normalized.get(idx, 0.0),
+                'vector_score': vector_normalized.get(idx, 0.0)
+            })
+        
         return relevant_knowledge
 
     def get_context_string(self, relevant_items: List[Dict[str, str]]) -> str:
@@ -77,7 +190,7 @@ class VectorKnowledgeBase:
 class GeminiChatbot:
     """Main chatbot class using Gemini API"""
 
-    def __init__(self, api_key: str, knowledge_base: VectorKnowledgeBase):
+    def __init__(self, api_key: str, knowledge_base: HybridKnowledgeBase):
         self.api_key = api_key
         self.knowledge_base = knowledge_base
         self.setup_gemini()
@@ -93,27 +206,79 @@ class GeminiChatbot:
             print(f"❌ เกิดข้อผิดพลาดในการเชื่อมต่อ Gemini API: {e}")
             raise
     
+    def expand_query(self, query: str) -> str:
+        """
+        Expand user query to improve search results for natural language questions
+        """
+        # Common conversational patterns in Thai
+        query_lower = query.lower()
+
+        # Normalize casual questions
+        if any(word in query_lower for word in ['อยาก', 'ต้องการ', 'สนใจ']):
+            # User expressing interest
+            if 'รู้' in query_lower or 'ทราบ' in query_lower:
+                query += " ข้อมูล รายละเอียด"
+
+        # Normalize question words
+        if 'ทำไง' in query_lower or 'ยังไง' in query_lower:
+            query += " วิธีการ ขั้นตอน"
+
+        if 'มี' in query_lower and 'ไหม' in query_lower:
+            query += " มีหรือไม่"
+
+        # Common topics expansion
+        if 'สมัคร' in query_lower:
+            query += " การรับสมัคร คุณสมบัติ เอกสาร"
+
+        if 'เรียน' in query_lower:
+            query += " หลักสูตร วิชา การศึกษา"
+
+        if 'ค่า' in query_lower and ('ใช้จ่าย' in query_lower or 'เทอม' in query_lower or 'เล่าเรียน' in query_lower):
+            query += " ค่าธรรมเนียม ค่าลงทะเบียน ค่าใช้จ่าย"
+
+        return query
+
     def create_prompt(self, user_question: str) -> str:
         """Create a comprehensive prompt with context"""
-        # Search for relevant knowledge
-        relevant_knowledge = self.knowledge_base.search_knowledge(user_question)
+        # Expand query for better search
+        expanded_query = self.expand_query(user_question)
+
+        # Search for relevant knowledge with more results
+        relevant_knowledge = self.knowledge_base.search_knowledge(expanded_query, n_results=8)
         context = self.knowledge_base.get_context_string(relevant_knowledge)
 
-        prompt = f"""คุณเป็นผู้ช่วยตอบคำถามเกี่ยวกับหลักสูตรของคณะครุศาสตร์อุตสาหกรรม มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
-ได้แก่ หลักสูตรคอมพิวเตอร์ศึกษา และหลักสูตรวิศวกรรมโยธาและการศึกษา
+        prompt = f"""คุณคือ "น้องบอท" ผู้ช่วยให้คำปรึกษาเกี่ยวกับหลักสูตรและการรับสมัครนักศึกษา
+ของคณะครุศาสตร์อุตสาหกรรม มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (มจพ.)
 
-{context}
+**บุคลิกภาพและสไตล์การตอบ:**
+- ตอบด้วยภาษาที่เป็นกันเอง เหมือนพี่ให้คำแนะนำน้อง ไม่เป็นทางการจนเกินไป
+- ใช้คำว่า "ครับ/ค่ะ" ตามความเหมาะสม
+- อธิบายให้เข้าใจง่าย ไม่ใช้ศัพท์เทคนิคที่ซับซ้อนเกินไป
+- ตอบสั้นกระชับ ตรงประเด็น ไม่ยืดยาวเกินไป
+- ถ้าคำถามไม่ชัดเจน ถามกลับอย่างสุภาพ
 
-คำถามจากผู้ใช้: {user_question}
+**วิธีการตอบ:**
+1. ตอบโจทย์หลักของคำถามก่อนเสมอ (ตรงๆ ไม่อ้อมค้อม)
+2. ให้รายละเอียดเพิ่มเติมที่จำเป็น (ถ้ามี)
+3. ถ้าไม่แน่ใจหรือไม่มีข้อมูล บอกตรงๆ และแนะนำช่องทางติดต่อ
 
-กรุณาตอบคำถามโดย:
-1. ใช้ข้อมูลจากฐานความรู้ที่ให้มาเป็นหลัก
-2. ตอบเป็นภาษาไทยที่เข้าใจง่าย
-3. หากไม่มีข้อมูลในฐานความรู้ ให้บอกว่าไม่มีข้อมูลและแนะนำให้สอบถามจากทางมหาวิทยาลัยโดยตรง
-4. ให้คำตอบที่ครบถ้วนและเป็นประโยชน์
-5. ระบุชื่อหลักสูตรที่เกี่ยวข้องให้ชัดเจน (คอมพิวเตอร์ศึกษา หรือ วิศวกรรมโยธาและการศึกษา)
+**ข้อมูลอ้างอิง:**
+{context if context else "(ไม่พบข้อมูลที่เกี่ยวข้องในฐานความรู้)"}
 
-คำตอบ:"""
+**คำถามจากผู้ใช้:** {user_question}
+
+**หมายเหตุสำคัญ:**
+- ใช้เฉพาะข้อมูลจากฐานความรู้ที่ให้มา
+- ถ้าไม่มีข้อมูล ให้บอกว่า "ขออภัยนะคะ ข้อมูลนี้ไม่มีในระบบ" และแนะนำให้ติดต่อ:
+  * เว็บไซต์: admission.kmutnb.ac.th
+  * โทร: 02-555-2000 (สำนักงานคณะ)
+  * Facebook: คณะครุศาสตร์อุตสาหกรรม มจพ.
+
+**ตัวอย่างการตอบที่ดี:**
+❌ "ตามข้อมูลที่ระบุไว้ในหลักสูตร หลักสูตรวิศวกรรมโยธาและการศึกษามีระยะเวลาศึกษาทั้งหมด 5 ปีครับ"
+✅ "หลักสูตรวิศวกรรมโยธาและการศึกษาเรียน 5 ปีนะคะ จบแล้วได้วุฒิครูและวิศวกรทั้งสองอาชีพเลย"
+
+**คำตอบของคุณ:**"""
 
         return prompt
     
@@ -164,17 +329,17 @@ def main():
     try:
         # Initialize vector knowledge base and chatbot
         print("=" * 80)
-        print("🔧 Initializing chatbot with vector database...")
+        print("🔧 Initializing chatbot with hybrid retrieval system...")
         print("=" * 80)
-        kb = VectorKnowledgeBase(persist_directory="./chroma_db", collection_name="chatbot_knowledge")
+        kb = HybridKnowledgeBase(persist_directory="./chroma_db", collection_name="chatbot_knowledge")
         chatbot = GeminiChatbot(api_key, kb)
         
         print("=" * 80)
         print("🤖 ยินดีต้อนรับสู่ระบบแชทบอทคณะครุศาสตร์อุตสาหกรรม")
         print("    มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ")
         print("=" * 80)
-        print("📚 ระบบ: Vector Database (Semantic Search)")
-        print("🔍 เทคโนโลยี: ChromaDB + Sentence Transformers")
+        print("📚 ระบบ: Hybrid Retrieval (BM25 + Vector Search)")
+        print("🔍 เทคโนโลยี: BM25 (keyword) + ChromaDB (semantic) + PyThaiNLP")
         print("-" * 80)
         print("📝 คุณสามารถถามคำถามเกี่ยวกับหลักสูตรวิศวกรรมโยธาและการศึกษาได้")
         print("💡 พิมพ์ 'quit', 'exit', หรือ 'ออก' เพื่อปิดโปรแกรม")

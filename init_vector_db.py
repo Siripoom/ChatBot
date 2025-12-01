@@ -11,6 +11,7 @@ import PyPDF2
 import chromadb
 from chromadb.config import Settings
 from sentence_transformers import SentenceTransformer
+from semantic_chunker import SemanticChunker
 
 
 class PDFProcessor:
@@ -39,9 +40,10 @@ class PDFProcessor:
             print(f"❌ Error extracting text from PDF: {e}")
             raise
 
-    def split_into_chunks(self, text: str, chunk_size: int = 500, overlap: int = 100) -> List[Dict[str, str]]:
+    def split_into_chunks_semantic(self, text: str, chunk_size: int = 500, overlap: int = 100) -> List[Dict[str, str]]:
         """
-        Split text into overlapping chunks for better context preservation
+        Split text using SEMANTIC CHUNKING - แยกตามความหมายและโครงสร้าง
+        ไม่ใช่แค่ตัดตามจำนวนตัวอักษร
 
         Args:
             text: Full text to split
@@ -49,44 +51,20 @@ class PDFProcessor:
             overlap: Number of overlapping characters between chunks
 
         Returns:
-            List of dictionaries with chunk text and metadata
+            List of dictionaries with chunk text and metadata (รวม heading, type, etc.)
         """
-        # Clean up text - remove excessive whitespace
-        text = re.sub(r'\s+', ' ', text).strip()
+        print(f"🎯 ใช้ Semantic Chunking แทนการตัดแบบเดิม")
+        print(f"   • แยกตามหัวข้อและโครงสร้างเอกสาร")
+        print(f"   • ใช้ Thai NLP (pythainlp) สำหรับ sentence tokenization")
+        print(f"   • รักษา context และความหมายของแต่ละส่วน")
 
-        # Split by sentences first (simple approach using periods)
-        sentences = re.split(r'(?<=[.!?])\s+', text)
+        # ใช้ SemanticChunker
+        chunker = SemanticChunker(chunk_size=chunk_size, chunk_overlap=overlap)
+        chunks = chunker.chunk_text(text, source=os.path.basename(self.pdf_path))
 
-        chunks = []
-        current_chunk = ""
-        chunk_id = 0
+        # แสดงการวิเคราะห์
+        chunker.print_chunk_analysis(chunks)
 
-        for sentence in sentences:
-            # If adding this sentence exceeds chunk_size, save current chunk
-            if len(current_chunk) + len(sentence) > chunk_size and current_chunk:
-                chunks.append({
-                    "id": f"chunk_{chunk_id}",
-                    "text": current_chunk.strip(),
-                    "source": os.path.basename(self.pdf_path)
-                })
-                chunk_id += 1
-
-                # Keep overlap from end of current chunk
-                words = current_chunk.split()
-                overlap_text = " ".join(words[-overlap:]) if len(words) > overlap else current_chunk
-                current_chunk = overlap_text + " " + sentence
-            else:
-                current_chunk += " " + sentence if current_chunk else sentence
-
-        # Don't forget the last chunk
-        if current_chunk:
-            chunks.append({
-                "id": f"chunk_{chunk_id}",
-                "text": current_chunk.strip(),
-                "source": os.path.basename(self.pdf_path)
-            })
-
-        print(f"📝 Split text into {len(chunks)} chunks")
         return chunks
 
 
@@ -188,11 +166,11 @@ def main():
     pdf_processor = PDFProcessor(pdf_path)
     text = pdf_processor.extract_text()
 
-    # Step 2: Split into chunks
+    # Step 2: Split into chunks using SEMANTIC CHUNKING
     print(f"\n{'='*80}")
-    print("Step 2: Splitting text into chunks")
+    print("Step 2: Splitting text into chunks (Semantic Chunking)")
     print("=" * 80)
-    chunks = pdf_processor.split_into_chunks(text, chunk_size=500, overlap=50)
+    chunks = pdf_processor.split_into_chunks_semantic(text, chunk_size=500, overlap=100)
 
     # Step 3: Build vector database
     print(f"\n{'='*80}")
