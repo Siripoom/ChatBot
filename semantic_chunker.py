@@ -218,7 +218,9 @@ class SemanticChunker:
 
         # เพิ่ม metadata
         for i, chunk in enumerate(chunks):
-            chunk['id'] = f"chunk_{i}"
+            # สร้าง unique ID โดยใช้ source filename + index
+            source_prefix = source.replace('.pdf', '').replace(' ', '_').replace('ชุดข้อมูลที่', 'doc')
+            chunk['id'] = f"{source_prefix}_chunk_{i}"
             chunk['source'] = source
             if 'metadata' not in chunk:
                 chunk['metadata'] = {}

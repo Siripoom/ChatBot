@@ -4,3 +4,7 @@ chromadb>=0.4.0
 sentence-transformers>=2.2.0
 rank-bm25>=0.2.2
 pythainlp>=4.0.0
+ragas>=0.1.0
+langchain>=0.1.0
+langchain-community>=0.0.10
+datasets>=2.14.0

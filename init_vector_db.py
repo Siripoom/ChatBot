@@ -120,6 +120,12 @@ class VectorDBBuilder:
 
         print(f"✅ Successfully added {len(ids)} documents to vector database")
 
+        # Verify count immediately
+        actual_count = collection.count()
+        print(f"🔍 Verification: Collection actually has {actual_count} documents")
+        if actual_count != len(ids):
+            print(f"⚠️  WARNING: Expected {len(ids)} but got {actual_count}!")
+
         # Print sample to verify
         print(f"\n📊 Sample document from collection:")
         print(f"   ID: {ids[0]}")
@@ -149,28 +155,51 @@ def main():
     print("🚀 Vector Database Initialization")
     print("=" * 80)
 
-    # PDF file path
-    pdf_path = "/home/siripoom/chatbot/data/ชุดข้อมูลที่ 1 ภาคโยธา.pdf"
+    # PDF file paths - รองรับหลายไฟล์
+    pdf_paths = [
+        "/home/siripoom/chatbot/data/ชุดข้อมูลที่ 1 ภาคโยธาTM.pdf",
+        "/home/siripoom/chatbot/data/ชุดข้อมูลที่ 2 ภาคคอม CED.pdf",
+        "/home/siripoom/chatbot/data/ชุดข้อมูลที่ 3 ภาคคอมTCT.pdf"
+    ]
 
-    # Check if PDF exists
-    if not os.path.exists(pdf_path):
-        print(f"❌ PDF file not found: {pdf_path}")
+    # Check if PDFs exist
+    existing_pdfs = []
+    for pdf_path in pdf_paths:
+        if os.path.exists(pdf_path):
+            existing_pdfs.append(pdf_path)
+            print(f"✅ Found: {os.path.basename(pdf_path)}")
+        else:
+            print(f"⚠️  Not found: {os.path.basename(pdf_path)}")
+
+    if not existing_pdfs:
+        print(f"❌ No PDF files found!")
         return
 
-    print(f"\n📂 Input PDF: {pdf_path}")
+    print(f"\n📂 Processing {len(existing_pdfs)} PDF file(s)")
 
-    # Step 1: Extract text from PDF
-    print(f"\n{'='*80}")
-    print("Step 1: Extracting text from PDF")
-    print("=" * 80)
-    pdf_processor = PDFProcessor(pdf_path)
-    text = pdf_processor.extract_text()
+    # ประมวลผลแต่ละไฟล์และรวม chunks
+    all_chunks = []
 
-    # Step 2: Split into chunks using SEMANTIC CHUNKING
+    for idx, pdf_path in enumerate(existing_pdfs, 1):
+        print(f"\n{'='*80}")
+        print(f"Processing PDF {idx}/{len(existing_pdfs)}: {os.path.basename(pdf_path)}")
+        print("=" * 80)
+
+        # Step 1: Extract text from PDF
+        print(f"\nStep 1.{idx}: Extracting text from PDF")
+        pdf_processor = PDFProcessor(pdf_path)
+        text = pdf_processor.extract_text()
+
+        # Step 2: Split into chunks using SEMANTIC CHUNKING
+        print(f"\nStep 2.{idx}: Splitting text into chunks (Semantic Chunking)")
+        chunks = pdf_processor.split_into_chunks_semantic(text, chunk_size=500, overlap=100)
+
+        print(f"✅ Got {len(chunks)} chunks from {os.path.basename(pdf_path)}")
+        all_chunks.extend(chunks)
+
     print(f"\n{'='*80}")
-    print("Step 2: Splitting text into chunks (Semantic Chunking)")
+    print(f"📊 Total chunks from all PDFs: {len(all_chunks)}")
     print("=" * 80)
-    chunks = pdf_processor.split_into_chunks_semantic(text, chunk_size=500, overlap=100)
 
     # Step 3: Build vector database
     print(f"\n{'='*80}")
@@ -180,7 +209,7 @@ def main():
         persist_directory="./chroma_db",
         collection_name="chatbot_knowledge"
     )
-    db_builder.create_collection(chunks)
+    db_builder.create_collection(all_chunks)
 
     # Step 4: Test the database
     print(f"\n{'='*80}")
@@ -193,7 +222,8 @@ def main():
     print("=" * 80)
     print(f"\n💡 Database location: ./chroma_db")
     print(f"💡 Collection name: chatbot_knowledge")
-    print(f"💡 Total chunks: {len(chunks)}")
+    print(f"💡 Total chunks: {len(all_chunks)}")
+    print(f"💡 Source PDFs: {len(existing_pdfs)} files")
 
 
 if __name__ == "__main__":
