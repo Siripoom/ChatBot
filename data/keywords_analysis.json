@@ -1,0 +1,2555 @@
+{
+  "files": {
+    "ข้อมูลชุดที่4 โครงสร้างหมวดวิชาศึกษาทั่วไป มจพ.docx": {
+      "file_name": "ข้อมูลชุดที่4 โครงสร้างหมวดวิชาศึกษาทั่วไป มจพ.docx",
+      "text_length": 133099,
+      "total_keywords": 100,
+      "keywords": [
+        {
+          "word": "หน่วยกิต",
+          "frequency": 379
+        },
+        {
+          "word": "รายวิชา",
+          "frequency": 180
+        },
+        {
+          "word": "วิชาบังคับ",
+          "frequency": 179
+        },
+        {
+          "word": "คำอธิบาย",
+          "frequency": 173
+        },
+        {
+          "word": "เรียน",
+          "frequency": 171
+        },
+        {
+          "word": "ภาษาอังกฤษ",
+          "frequency": 137
+        },
+        {
+          "word": "ทักษะ",
+          "frequency": 86
+        },
+        {
+          "word": "English",
+          "frequency": 82
+        },
+        {
+          "word": "ธุรกิจ",
+          "frequency": 67
+        },
+        {
+          "word": "สำหรับ",
+          "frequency": 59
+        },
+        {
+          "word": "เชิง",
+          "frequency": 59
+        },
+        {
+          "word": "สังคม",
+          "frequency": 57
+        },
+        {
+          "word": "skills",
+          "frequency": 56
+        },
+        {
+          "word": "ชีวิตประจำวัน",
+          "frequency": 54
+        },
+        {
+          "word": "การพัฒนา",
+          "frequency": 54
+        },
+        {
+          "word": "Life",
+          "frequency": 51
+        },
+        {
+          "word": "สิ่งแวดล้อม",
+          "frequency": 50
+        },
+        {
+          "word": "ระบบ",
+          "frequency": 47
+        },
+        {
+          "word": "คณะ",
+          "frequency": 45
+        },
+        {
+          "word": "business",
+          "frequency": 45
+        },
+        {
+          "word": "management",
+          "frequency": 45
+        },
+        {
+          "word": "การทำงาน",
+          "frequency": 44
+        },
+        {
+          "word": "life",
+          "frequency": 44
+        },
+        {
+          "word": "development",
+          "frequency": 44
+        },
+        {
+          "word": "นวัตกรรม",
+          "frequency": 43
+        },
+        {
+          "word": "มนุษย์",
+          "frequency": 43
+        },
+        {
+          "word": "สุขภาพ",
+          "frequency": 43
+        },
+        {
+          "word": "basic",
+          "frequency": 42
+        },
+        {
+          "word": "เบื้องต้น",
+          "frequency": 41
+        },
+        {
+          "word": "การเขียน",
+          "frequency": 39
+        },
+        {
+          "word": "การสื่อสาร",
+          "frequency": 38
+        },
+        {
+          "word": "อุตสาหกรรม",
+          "frequency": 38
+        },
+        {
+          "word": "เทคโนโลยี",
+          "frequency": 36
+        },
+        {
+          "word": "นำเสนอ",
+          "frequency": 35
+        },
+        {
+          "word": "social",
+          "frequency": 35
+        },
+        {
+          "word": "ประยุกต์",
+          "frequency": 34
+        },
+        {
+          "word": "บริการ",
+          "frequency": 34
+        },
+        {
+          "word": "อาหาร",
+          "frequency": 34
+        },
+        {
+          "word": "ระดับ",
+          "frequency": 32
+        },
+        {
+          "word": "อ่าน",
+          "frequency": 32
+        },
+        {
+          "word": "พื้นฐาน",
+          "frequency": 32
+        },
+        {
+          "word": "human",
+          "frequency": 32
+        },
+        {
+          "word": "เล่น",
+          "frequency": 32
+        },
+        {
+          "word": "writing",
+          "frequency": 31
+        },
+        {
+          "word": "วิเคราะห์",
+          "frequency": 31
+        },
+        {
+          "word": "กีฬา",
+          "frequency": 30
+        },
+        {
+          "word": "จริยธรรม",
+          "frequency": 30
+        },
+        {
+          "word": "ethics",
+          "frequency": 30
+        },
+        {
+          "word": "ชีวิต",
+          "frequency": 30
+        },
+        {
+          "word": "food",
+          "frequency": 30
+        },
+        {
+          "word": "หลักสูตร",
+          "frequency": 29
+        },
+        {
+          "word": "สร้าง",
+          "frequency": 29
+        },
+        {
+          "word": "กา",
+          "frequency": 29
+        },
+        {
+          "word": "คอมพิวเตอร์",
+          "frequency": 28
+        },
+        {
+          "word": "ออกแบบ",
+          "frequency": 27
+        },
+        {
+          "word": "งาน",
+          "frequency": 27
+        },
+        {
+          "word": "แนวคิด",
+          "frequency": 27
+        },
+        {
+          "word": "ข้อมูล",
+          "frequency": 26
+        },
+        {
+          "word": "ทั่วไป",
+          "frequency": 26
+        },
+        {
+          "word": "ผลิตภัณฑ์",
+          "frequency": 25
+        },
+        {
+          "word": "หลักการ",
+          "frequency": 25
+        },
+        {
+          "word": "วิทยาลัย",
+          "frequency": 24
+        },
+        {
+          "word": "ความรู้",
+          "frequency": 24
+        },
+        {
+          "word": "กฎหมาย",
+          "frequency": 24
+        },
+        {
+          "word": "ดิจิทัล",
+          "frequency": 23
+        },
+        {
+          "word": "communication",
+          "frequency": 23
+        },
+        {
+          "word": "types",
+          "frequency": 23
+        },
+        {
+          "word": "principles",
+          "frequency": 23
+        },
+        {
+          "word": "เศรษฐกิจ",
+          "frequency": 23
+        },
+        {
+          "word": "โปรแกรม",
+          "frequency": 23
+        },
+        {
+          "word": "นานาชาติ",
+          "frequency": 22
+        },
+        {
+          "word": "กระบวนการ",
+          "frequency": 22
+        },
+        {
+          "word": "กิจกรรม",
+          "frequency": 22
+        },
+        {
+          "word": "เทคนิค",
+          "frequency": 22
+        },
+        {
+          "word": "knowledge",
+          "frequency": 22
+        },
+        {
+          "word": "products",
+          "frequency": 22
+        },
+        {
+          "word": "ประเภท",
+          "frequency": 22
+        },
+        {
+          "word": "ปริญญาตรี",
+          "frequency": 21
+        },
+        {
+          "word": "application",
+          "frequency": 21
+        },
+        {
+          "word": "analysis",
+          "frequency": 21
+        },
+        {
+          "word": "พฤติกรรม",
+          "frequency": 21
+        },
+        {
+          "word": "thinking",
+          "frequency": 21
+        },
+        {
+          "word": "environmental",
+          "frequency": 21
+        },
+        {
+          "word": "ผู้ประกอบการ",
+          "frequency": 20
+        },
+        {
+          "word": "ดี",
+          "frequency": 20
+        },
+        {
+          "word": "Practical",
+          "frequency": 20
+        },
+        {
+          "word": "หลัก",
+          "frequency": 20
+        },
+        {
+          "word": "system",
+          "frequency": 20
+        },
+        {
+          "word": "ฝึก",
+          "frequency": 20
+        },
+        {
+          "word": "data",
+          "frequency": 20
+        },
+        {
+          "word": "technology",
+          "frequency": 20
+        },
+        {
+          "word": "เลือก",
+          "frequency": 19
+        },
+        {
+          "word": "บทความ",
+          "frequency": 19
+        },
+        {
+          "word": "ความสำคัญ",
+          "frequency": 19
+        },
+        {
+          "word": "environment",
+          "frequency": 19
+        },
+        {
+          "word": "อุปกรณ์",
+          "frequency": 19
+        },
+        {
+          "word": "health",
+          "frequency": 19
+        },
+        {
+          "word": "วิชา",
+          "frequency": 18
+        },
+        {
+          "word": "เสริมสร้าง",
+          "frequency": 18
+        },
+        {
+          "word": "นันทนาการ",
+          "frequency": 18
+        }
+      ],
+      "top_20_keywords": [
+        "หน่วยกิต",
+        "รายวิชา",
+        "วิชาบังคับ",
+        "คำอธิบาย",
+        "เรียน",
+        "ภาษาอังกฤษ",
+        "ทักษะ",
+        "English",
+        "ธุรกิจ",
+        "สำหรับ",
+        "เชิง",
+        "สังคม",
+        "skills",
+        "ชีวิตประจำวัน",
+        "การพัฒนา",
+        "Life",
+        "สิ่งแวดล้อม",
+        "ระบบ",
+        "คณะ",
+        "business"
+      ]
+    },
+    "ชุดข้อมูลที่ 1 ภาคโยธาTM.docx": {
+      "file_name": "ชุดข้อมูลที่ 1 ภาคโยธาTM.docx",
+      "text_length": 134579,
+      "total_keywords": 100,
+      "keywords": [
+        {
+          "word": "การศึกษา",
+          "frequency": 251
+        },
+        {
+          "word": "รายวิชา",
+          "frequency": 189
+        },
+        {
+          "word": "หลักสูตร",
+          "frequency": 188
+        },
+        {
+          "word": "วิศวกรรมโยธา",
+          "frequency": 181
+        },
+        {
+          "word": "หน่วยกิต",
+          "frequency": 153
+        },
+        {
+          "word": "เรียน",
+          "frequency": 135
+        },
+        {
+          "word": "วิศวกรรม",
+          "frequency": 123
+        },
+        {
+          "word": "การสอน",
+          "frequency": 112
+        },
+        {
+          "word": "งาน",
+          "frequency": 105
+        },
+        {
+          "word": "คำอธิบาย",
+          "frequency": 94
+        },
+        {
+          "word": "วิชาบังคับ",
+          "frequency": 92
+        },
+        {
+          "word": "ออกแบบ",
+          "frequency": 88
+        },
+        {
+          "word": "Engineering",
+          "frequency": 79
+        },
+        {
+          "word": "ทักษะ",
+          "frequency": 71
+        },
+        {
+          "word": "วิเคราะห์",
+          "frequency": 71
+        },
+        {
+          "word": "วิชาชีพ",
+          "frequency": 68
+        },
+        {
+          "word": "โครงสร้าง",
+          "frequency": 64
+        },
+        {
+          "word": "กา",
+          "frequency": 63
+        },
+        {
+          "word": "ปี",
+          "frequency": 62
+        },
+        {
+          "word": "โยธา",
+          "frequency": 62
+        },
+        {
+          "word": "เทคโนโลยี",
+          "frequency": 60
+        },
+        {
+          "word": "นักศึกษา",
+          "frequency": 59
+        },
+        {
+          "word": "ครู",
+          "frequency": 58
+        },
+        {
+          "word": "ระบบ",
+          "frequency": 55
+        },
+        {
+          "word": "น้ำ",
+          "frequency": 53
+        },
+        {
+          "word": "พัฒนา",
+          "frequency": 52
+        },
+        {
+          "word": "การเรียนรู้",
+          "frequency": 51
+        },
+        {
+          "word": "ฝึก",
+          "frequency": 50
+        },
+        {
+          "word": "ครุศาสตร์",
+          "frequency": 50
+        },
+        {
+          "word": "ความรู้",
+          "frequency": 48
+        },
+        {
+          "word": "design",
+          "frequency": 48
+        },
+        {
+          "word": "วิชา",
+          "frequency": 46
+        },
+        {
+          "word": "การเรียน",
+          "frequency": 45
+        },
+        {
+          "word": "ผู้เรียน",
+          "frequency": 43
+        },
+        {
+          "word": "เทคนิค",
+          "frequency": 41
+        },
+        {
+          "word": "teaching",
+          "frequency": 41
+        },
+        {
+          "word": "ดิน",
+          "frequency": 40
+        },
+        {
+          "word": "การพัฒนา",
+          "frequency": 39
+        },
+        {
+          "word": "ดังนี้",
+          "frequency": 39
+        },
+        {
+          "word": "ภาคการศึกษา",
+          "frequency": 39
+        },
+        {
+          "word": "ก่อสร้าง",
+          "frequency": 38
+        },
+        {
+          "word": "analysis",
+          "frequency": 38
+        },
+        {
+          "word": "แผน",
+          "frequency": 37
+        },
+        {
+          "word": "โครงงาน",
+          "frequency": 37
+        },
+        {
+          "word": "management",
+          "frequency": 37
+        },
+        {
+          "word": "วัสดุ",
+          "frequency": 35
+        },
+        {
+          "word": "คณิตศาสตร์",
+          "frequency": 34
+        },
+        {
+          "word": "ํา",
+          "frequency": 34
+        },
+        {
+          "word": "แรง",
+          "frequency": 34
+        },
+        {
+          "word": "พ.ศ.",
+          "frequency": 33
+        },
+        {
+          "word": "สร้าง",
+          "frequency": 33
+        },
+        {
+          "word": "ศาสตร์",
+          "frequency": 33
+        },
+        {
+          "word": "กลศาสตร์",
+          "frequency": 33
+        },
+        {
+          "word": "development",
+          "frequency": 33
+        },
+        {
+          "word": "learning",
+          "frequency": 33
+        },
+        {
+          "word": "มหาวิทยาลัย",
+          "frequency": 32
+        },
+        {
+          "word": "ภาษาอังกฤษ",
+          "frequency": 30
+        },
+        {
+          "word": "คุณภาพ",
+          "frequency": 30
+        },
+        {
+          "word": "system",
+          "frequency": 30
+        },
+        {
+          "word": "ประเทศ",
+          "frequency": 29
+        },
+        {
+          "word": "เบื้องต้น",
+          "frequency": 29
+        },
+        {
+          "word": "water",
+          "frequency": 29
+        },
+        {
+          "word": "พระ",
+          "frequency": 28
+        },
+        {
+          "word": "จอมเกล้า",
+          "frequency": 28
+        },
+        {
+          "word": "อาคาร",
+          "frequency": 27
+        },
+        {
+          "word": "ประยุกต์ใช้",
+          "frequency": 27
+        },
+        {
+          "word": "หรับ",
+          "frequency": 27
+        },
+        {
+          "word": "บัณฑิต",
+          "frequency": 26
+        },
+        {
+          "word": "ศึกษา",
+          "frequency": 26
+        },
+        {
+          "word": "วิธี",
+          "frequency": 26
+        },
+        {
+          "word": "ระดับ",
+          "frequency": 26
+        },
+        {
+          "word": "Management",
+          "frequency": 26
+        },
+        {
+          "word": "soil",
+          "frequency": 26
+        },
+        {
+          "word": "สังคม",
+          "frequency": 25
+        },
+        {
+          "word": "หลักการ",
+          "frequency": 25
+        },
+        {
+          "word": "เชิง",
+          "frequency": 25
+        },
+        {
+          "word": "การบริหาร",
+          "frequency": 25
+        },
+        {
+          "word": "วิชาเลือก",
+          "frequency": 25
+        },
+        {
+          "word": "สถาบัน",
+          "frequency": 25
+        },
+        {
+          "word": "สํา",
+          "frequency": 25
+        },
+        {
+          "word": "Mechanics",
+          "frequency": 24
+        },
+        {
+          "word": "evaluation",
+          "frequency": 24
+        },
+        {
+          "word": "หมวด",
+          "frequency": 23
+        },
+        {
+          "word": "ดี",
+          "frequency": 23
+        },
+        {
+          "word": "โครงการ",
+          "frequency": 23
+        },
+        {
+          "word": "นวัตกรรม",
+          "frequency": 22
+        },
+        {
+          "word": "ปฏิบัติการ",
+          "frequency": 22
+        },
+        {
+          "word": "ฟิสิกส์",
+          "frequency": 22
+        },
+        {
+          "word": "practice",
+          "frequency": 22
+        },
+        {
+          "word": "ภาควิชา",
+          "frequency": 21
+        },
+        {
+          "word": "สถานศึกษา",
+          "frequency": 21
+        },
+        {
+          "word": "งานก่อสร้าง",
+          "frequency": 21
+        },
+        {
+          "word": "ภาคสนาม",
+          "frequency": 21
+        },
+        {
+          "word": "ต่าง ๆ",
+          "frequency": 21
+        },
+        {
+          "word": "สมบัติ",
+          "frequency": 21
+        },
+        {
+          "word": "concrete",
+          "frequency": 21
+        },
+        {
+          "word": "สมการ",
+          "frequency": 21
+        },
+        {
+          "word": "construction",
+          "frequency": 21
+        },
+        {
+          "word": "project",
+          "frequency": 21
+        },
+        {
+          "word": "สำเร็จการศึกษา",
+          "frequency": 21
+        }
+      ],
+      "top_20_keywords": [
+        "การศึกษา",
+        "รายวิชา",
+        "หลักสูตร",
+        "วิศวกรรมโยธา",
+        "หน่วยกิต",
+        "เรียน",
+        "วิศวกรรม",
+        "การสอน",
+        "งาน",
+        "คำอธิบาย",
+        "วิชาบังคับ",
+        "ออกแบบ",
+        "Engineering",
+        "ทักษะ",
+        "วิเคราะห์",
+        "วิชาชีพ",
+        "โครงสร้าง",
+        "กา",
+        "ปี",
+        "โยธา"
+      ]
+    },
+    "ชุดข้อมูลที่ 2 ภาคคอม CED.docx": {
+      "file_name": "ชุดข้อมูลที่ 2 ภาคคอม CED.docx",
+      "text_length": 83835,
+      "total_keywords": 100,
+      "keywords": [
+        {
+          "word": "คอมพิวเตอร์",
+          "frequency": 156
+        },
+        {
+          "word": "เทคโนโลยี",
+          "frequency": 139
+        },
+        {
+          "word": "หน่วยกิต",
+          "frequency": 115
+        },
+        {
+          "word": "รายวิชา",
+          "frequency": 100
+        },
+        {
+          "word": "หลักสูตร",
+          "frequency": 91
+        },
+        {
+          "word": "ระบบ",
+          "frequency": 77
+        },
+        {
+          "word": "การสอน",
+          "frequency": 76
+        },
+        {
+          "word": "เรียน",
+          "frequency": 68
+        },
+        {
+          "word": "การศึกษา",
+          "frequency": 66
+        },
+        {
+          "word": "พระ",
+          "frequency": 61
+        },
+        {
+          "word": "จอมเกล้า",
+          "frequency": 61
+        },
+        {
+          "word": "พระนครเหนือ",
+          "frequency": 60
+        },
+        {
+          "word": "การเรียนรู้",
+          "frequency": 60
+        },
+        {
+          "word": "ศึกษา",
+          "frequency": 56
+        },
+        {
+          "word": "สถาบัน",
+          "frequency": 54
+        },
+        {
+          "word": "วิชา",
+          "frequency": 53
+        },
+        {
+          "word": "วิชาบังคับ",
+          "frequency": 53
+        },
+        {
+          "word": "ข้อมูล",
+          "frequency": 52
+        },
+        {
+          "word": "คำอธิบาย",
+          "frequency": 51
+        },
+        {
+          "word": "ผู้เรียน",
+          "frequency": 48
+        },
+        {
+          "word": "learning",
+          "frequency": 48
+        },
+        {
+          "word": "การพัฒนา",
+          "frequency": 45
+        },
+        {
+          "word": "development",
+          "frequency": 39
+        },
+        {
+          "word": "พัฒนา",
+          "frequency": 38
+        },
+        {
+          "word": "ภาษาอังกฤษ",
+          "frequency": 34
+        },
+        {
+          "word": "มหาวิทยาลัย",
+          "frequency": 34
+        },
+        {
+          "word": "การเรียน",
+          "frequency": 33
+        },
+        {
+          "word": "จำนวน",
+          "frequency": 32
+        },
+        {
+          "word": "ออกแบบ",
+          "frequency": 32
+        },
+        {
+          "word": "teaching",
+          "frequency": 32
+        },
+        {
+          "word": "นักศึกษา",
+          "frequency": 31
+        },
+        {
+          "word": "สำเร็จการศึกษา",
+          "frequency": 31
+        },
+        {
+          "word": "ฝึก",
+          "frequency": 31
+        },
+        {
+          "word": "ครู",
+          "frequency": 30
+        },
+        {
+          "word": "ระดับ",
+          "frequency": 28
+        },
+        {
+          "word": "ทักษะ",
+          "frequency": 27
+        },
+        {
+          "word": "วิชาชีพ",
+          "frequency": 27
+        },
+        {
+          "word": "computer",
+          "frequency": 27
+        },
+        {
+          "word": "learner",
+          "frequency": 27
+        },
+        {
+          "word": "หมวด",
+          "frequency": 26
+        },
+        {
+          "word": "โปรแกรม",
+          "frequency": 26
+        },
+        {
+          "word": "ประยุกต์ใช้",
+          "frequency": 26
+        },
+        {
+          "word": "โครงงาน",
+          "frequency": 26
+        },
+        {
+          "word": "management",
+          "frequency": 26
+        },
+        {
+          "word": "สถานศึกษา",
+          "frequency": 25
+        },
+        {
+          "word": "data",
+          "frequency": 25
+        },
+        {
+          "word": "system",
+          "frequency": 25
+        },
+        {
+          "word": "ภาคการศึกษา",
+          "frequency": 24
+        },
+        {
+          "word": "นวัตกรรม",
+          "frequency": 23
+        },
+        {
+          "word": "การสื่อสาร",
+          "frequency": 23
+        },
+        {
+          "word": "อุปกรณ์",
+          "frequency": 23
+        },
+        {
+          "word": "ประเทศ",
+          "frequency": 22
+        },
+        {
+          "word": "สร้าง",
+          "frequency": 22
+        },
+        {
+          "word": "วิเคราะห์",
+          "frequency": 22
+        },
+        {
+          "word": "โครงสร้าง",
+          "frequency": 22
+        },
+        {
+          "word": "information",
+          "frequency": 22
+        },
+        {
+          "word": "ปี",
+          "frequency": 21
+        },
+        {
+          "word": "ภาษา",
+          "frequency": 21
+        },
+        {
+          "word": "คุณวุฒิ",
+          "frequency": 21
+        },
+        {
+          "word": "งาน",
+          "frequency": 20
+        },
+        {
+          "word": "ดังนี้",
+          "frequency": 20
+        },
+        {
+          "word": "Technology",
+          "frequency": 19
+        },
+        {
+          "word": "อ.บ.",
+          "frequency": 19
+        },
+        {
+          "word": "การทำงาน",
+          "frequency": 19
+        },
+        {
+          "word": "ภาควิชา",
+          "frequency": 19
+        },
+        {
+          "word": "ทำ",
+          "frequency": 19
+        },
+        {
+          "word": "ความรู้",
+          "frequency": 19
+        },
+        {
+          "word": "evaluation",
+          "frequency": 19
+        },
+        {
+          "word": "บัณฑิต",
+          "frequency": 18
+        },
+        {
+          "word": "ม.",
+          "frequency": 18
+        },
+        {
+          "word": "พื้นฐาน",
+          "frequency": 18
+        },
+        {
+          "word": "คณิตศาสตร์",
+          "frequency": 18
+        },
+        {
+          "word": "เทคโนโลยีสารสนเทศ",
+          "frequency": 17
+        },
+        {
+          "word": "สารสนเทศ",
+          "frequency": 17
+        },
+        {
+          "word": "เชิง",
+          "frequency": 17
+        },
+        {
+          "word": "ซอฟต์แวร์",
+          "frequency": 17
+        },
+        {
+          "word": "วงจร",
+          "frequency": 16
+        },
+        {
+          "word": "แผน",
+          "frequency": 16
+        },
+        {
+          "word": "สาขา",
+          "frequency": 16
+        },
+        {
+          "word": "ดี",
+          "frequency": 16
+        },
+        {
+          "word": "Practice",
+          "frequency": 16
+        },
+        {
+          "word": "ทฤษฎี",
+          "frequency": 16
+        },
+        {
+          "word": "ดิจิทัล",
+          "frequency": 16
+        },
+        {
+          "word": "System",
+          "frequency": 16
+        },
+        {
+          "word": "ประสบการณ์",
+          "frequency": 16
+        },
+        {
+          "word": "practice",
+          "frequency": 16
+        },
+        {
+          "word": "Computer",
+          "frequency": 15
+        },
+        {
+          "word": "สำหรับ",
+          "frequency": 15
+        },
+        {
+          "word": "ทั่วไป",
+          "frequency": 15
+        },
+        {
+          "word": "การเขียน",
+          "frequency": 15
+        },
+        {
+          "word": "technology",
+          "frequency": 15
+        },
+        {
+          "word": "ภาษาไทย",
+          "frequency": 14
+        },
+        {
+          "word": "ผู้ช่วยศาสตราจารย์",
+          "frequency": 14
+        },
+        {
+          "word": "สอน",
+          "frequency": 14
+        },
+        {
+          "word": "ชั่วโมง",
+          "frequency": 14
+        },
+        {
+          "word": "การประเมิน",
+          "frequency": 14
+        },
+        {
+          "word": "ฐานข้อมูล",
+          "frequency": 14
+        },
+        {
+          "word": "application",
+          "frequency": 14
+        },
+        {
+          "word": "design",
+          "frequency": 14
+        },
+        {
+          "word": "communication",
+          "frequency": 14
+        }
+      ],
+      "top_20_keywords": [
+        "คอมพิวเตอร์",
+        "เทคโนโลยี",
+        "หน่วยกิต",
+        "รายวิชา",
+        "หลักสูตร",
+        "ระบบ",
+        "การสอน",
+        "เรียน",
+        "การศึกษา",
+        "พระ",
+        "จอมเกล้า",
+        "พระนครเหนือ",
+        "การเรียนรู้",
+        "ศึกษา",
+        "สถาบัน",
+        "วิชา",
+        "วิชาบังคับ",
+        "ข้อมูล",
+        "คำอธิบาย",
+        "ผู้เรียน"
+      ]
+    },
+    "ชุดข้อมูลที่ 3 ภาคคอมTCT.docx": {
+      "file_name": "ชุดข้อมูลที่ 3 ภาคคอมTCT.docx",
+      "text_length": 65931,
+      "total_keywords": 100,
+      "keywords": [
+        {
+          "word": "เทคโนโลยี",
+          "frequency": 133
+        },
+        {
+          "word": "คอมพิวเตอร์",
+          "frequency": 118
+        },
+        {
+          "word": "หน่วยกิต",
+          "frequency": 79
+        },
+        {
+          "word": "หลักสูตร",
+          "frequency": 75
+        },
+        {
+          "word": "การสอน",
+          "frequency": 70
+        },
+        {
+          "word": "รายวิชา",
+          "frequency": 69
+        },
+        {
+          "word": "การเรียนรู้",
+          "frequency": 64
+        },
+        {
+          "word": "พระ",
+          "frequency": 57
+        },
+        {
+          "word": "การศึกษา",
+          "frequency": 56
+        },
+        {
+          "word": "จอมเกล้า",
+          "frequency": 56
+        },
+        {
+          "word": "พระนครเหนือ",
+          "frequency": 56
+        },
+        {
+          "word": "สถาบัน",
+          "frequency": 54
+        },
+        {
+          "word": "ระบบ",
+          "frequency": 48
+        },
+        {
+          "word": "ผู้เรียน",
+          "frequency": 46
+        },
+        {
+          "word": "การพัฒนา",
+          "frequency": 45
+        },
+        {
+          "word": "learning",
+          "frequency": 45
+        },
+        {
+          "word": "เรียน",
+          "frequency": 41
+        },
+        {
+          "word": "development",
+          "frequency": 37
+        },
+        {
+          "word": "คำอธิบาย",
+          "frequency": 35
+        },
+        {
+          "word": "พัฒนา",
+          "frequency": 34
+        },
+        {
+          "word": "วิชาบังคับ",
+          "frequency": 33
+        },
+        {
+          "word": "ศึกษา",
+          "frequency": 31
+        },
+        {
+          "word": "นักศึกษา",
+          "frequency": 31
+        },
+        {
+          "word": "สำเร็จการศึกษา",
+          "frequency": 31
+        },
+        {
+          "word": "ฝึก",
+          "frequency": 31
+        },
+        {
+          "word": "มหาวิทยาลัย",
+          "frequency": 30
+        },
+        {
+          "word": "ข้อมูล",
+          "frequency": 29
+        },
+        {
+          "word": "ระดับ",
+          "frequency": 29
+        },
+        {
+          "word": "การเรียน",
+          "frequency": 29
+        },
+        {
+          "word": "teaching",
+          "frequency": 29
+        },
+        {
+          "word": "ครู",
+          "frequency": 28
+        },
+        {
+          "word": "จำนวน",
+          "frequency": 27
+        },
+        {
+          "word": "learner",
+          "frequency": 27
+        },
+        {
+          "word": "วิชาชีพ",
+          "frequency": 26
+        },
+        {
+          "word": "ออกแบบ",
+          "frequency": 26
+        },
+        {
+          "word": "สถานศึกษา",
+          "frequency": 25
+        },
+        {
+          "word": "วิชา",
+          "frequency": 25
+        },
+        {
+          "word": "โครงงาน",
+          "frequency": 25
+        },
+        {
+          "word": "ประยุกต์ใช้",
+          "frequency": 24
+        },
+        {
+          "word": "นวัตกรรม",
+          "frequency": 23
+        },
+        {
+          "word": "ภาษาอังกฤษ",
+          "frequency": 22
+        },
+        {
+          "word": "ประเทศ",
+          "frequency": 22
+        },
+        {
+          "word": "ภาคการศึกษา",
+          "frequency": 22
+        },
+        {
+          "word": "ทักษะ",
+          "frequency": 21
+        },
+        {
+          "word": "โปรแกรม",
+          "frequency": 21
+        },
+        {
+          "word": "คุณวุฒิ",
+          "frequency": 21
+        },
+        {
+          "word": "สร้าง",
+          "frequency": 20
+        },
+        {
+          "word": "ปี",
+          "frequency": 19
+        },
+        {
+          "word": "อ.บ.",
+          "frequency": 19
+        },
+        {
+          "word": "ทำ",
+          "frequency": 19
+        },
+        {
+          "word": "management",
+          "frequency": 19
+        },
+        {
+          "word": "บัณฑิต",
+          "frequency": 18
+        },
+        {
+          "word": "ม.",
+          "frequency": 18
+        },
+        {
+          "word": "ประสบการณ์",
+          "frequency": 18
+        },
+        {
+          "word": "วิเคราะห์",
+          "frequency": 17
+        },
+        {
+          "word": "evaluation",
+          "frequency": 17
+        },
+        {
+          "word": "Technology",
+          "frequency": 16
+        },
+        {
+          "word": "เทคโนโลยีสารสนเทศ",
+          "frequency": 16
+        },
+        {
+          "word": "สาขา",
+          "frequency": 16
+        },
+        {
+          "word": "Practice",
+          "frequency": 16
+        },
+        {
+          "word": "ความรู้",
+          "frequency": 16
+        },
+        {
+          "word": "โอน",
+          "frequency": 15
+        },
+        {
+          "word": "สำหรับ",
+          "frequency": 15
+        },
+        {
+          "word": "งาน",
+          "frequency": 15
+        },
+        {
+          "word": "พื้นฐาน",
+          "frequency": 15
+        },
+        {
+          "word": "ซอฟต์แวร์",
+          "frequency": 15
+        },
+        {
+          "word": "data",
+          "frequency": 15
+        },
+        {
+          "word": "computer",
+          "frequency": 15
+        },
+        {
+          "word": "ภาษาไทย",
+          "frequency": 14
+        },
+        {
+          "word": "ผู้ช่วยศาสตราจารย์",
+          "frequency": 14
+        },
+        {
+          "word": "การสื่อสาร",
+          "frequency": 14
+        },
+        {
+          "word": "อุปกรณ์",
+          "frequency": 14
+        },
+        {
+          "word": "แผน",
+          "frequency": 14
+        },
+        {
+          "word": "วัด",
+          "frequency": 14
+        },
+        {
+          "word": "เชิง",
+          "frequency": 14
+        },
+        {
+          "word": "จิตวิทยา",
+          "frequency": 14
+        },
+        {
+          "word": "การประเมิน",
+          "frequency": 14
+        },
+        {
+          "word": "practice",
+          "frequency": 14
+        },
+        {
+          "word": "research",
+          "frequency": 14
+        },
+        {
+          "word": "อาจารย์",
+          "frequency": 13
+        },
+        {
+          "word": "อ.",
+          "frequency": 13
+        },
+        {
+          "word": "ธุรกิจ",
+          "frequency": 13
+        },
+        {
+          "word": "เว็บ",
+          "frequency": 13
+        },
+        {
+          "word": "ดี",
+          "frequency": 13
+        },
+        {
+          "word": "ชั่วโมง",
+          "frequency": 13
+        },
+        {
+          "word": "technology",
+          "frequency": 13
+        },
+        {
+          "word": "เทียบ",
+          "frequency": 12
+        },
+        {
+          "word": "วิศวกรรม",
+          "frequency": 12
+        },
+        {
+          "word": "การทำงาน",
+          "frequency": 12
+        },
+        {
+          "word": "Development",
+          "frequency": 12
+        },
+        {
+          "word": "การเขียน",
+          "frequency": 12
+        },
+        {
+          "word": "ประเมินผล",
+          "frequency": 12
+        },
+        {
+          "word": "thinking",
+          "frequency": 12
+        },
+        {
+          "word": "สื่อ",
+          "frequency": 12
+        },
+        {
+          "word": "teacher",
+          "frequency": 12
+        },
+        {
+          "word": "หลักการ",
+          "frequency": 12
+        },
+        {
+          "word": "system",
+          "frequency": 12
+        },
+        {
+          "word": "security",
+          "frequency": 12
+        },
+        {
+          "word": "ภาคสนาม",
+          "frequency": 12
+        },
+        {
+          "word": "หมวด",
+          "frequency": 11
+        }
+      ],
+      "top_20_keywords": [
+        "เทคโนโลยี",
+        "คอมพิวเตอร์",
+        "หน่วยกิต",
+        "หลักสูตร",
+        "การสอน",
+        "รายวิชา",
+        "การเรียนรู้",
+        "พระ",
+        "การศึกษา",
+        "จอมเกล้า",
+        "พระนครเหนือ",
+        "สถาบัน",
+        "ระบบ",
+        "ผู้เรียน",
+        "การพัฒนา",
+        "learning",
+        "เรียน",
+        "development",
+        "คำอธิบาย",
+        "พัฒนา"
+      ]
+    },
+    "ชุดข้อมูลที่ 5 คู่มือนักศึกษา ปีการศึกษา 2568.docx": {
+      "file_name": "ชุดข้อมูลที่ 5 คู่มือนักศึกษา ปีการศึกษา 2568.docx",
+      "text_length": 111522,
+      "total_keywords": 100,
+      "keywords": [
+        {
+          "word": "นักศึกษา",
+          "frequency": 646
+        },
+        {
+          "word": "มหาวิทยาลัย",
+          "frequency": 290
+        },
+        {
+          "word": "การศึกษา",
+          "frequency": 217
+        },
+        {
+          "word": "ข้อ",
+          "frequency": 200
+        },
+        {
+          "word": "ระดับ",
+          "frequency": 168
+        },
+        {
+          "word": "ภาคการศึกษา",
+          "frequency": 162
+        },
+        {
+          "word": "วิชา",
+          "frequency": 143
+        },
+        {
+          "word": "ค่า",
+          "frequency": 114
+        },
+        {
+          "word": "รายวิชา",
+          "frequency": 104
+        },
+        {
+          "word": "เรียน",
+          "frequency": 102
+        },
+        {
+          "word": "สภาพ",
+          "frequency": 97
+        },
+        {
+          "word": "หลักสูตร",
+          "frequency": 92
+        },
+        {
+          "word": "พระ",
+          "frequency": 88
+        },
+        {
+          "word": "ลงทะเบียน",
+          "frequency": 86
+        },
+        {
+          "word": "หน่วยกิต",
+          "frequency": 81
+        },
+        {
+          "word": "เทคโนโลยี",
+          "frequency": 78
+        },
+        {
+          "word": "จอมเกล้า",
+          "frequency": 76
+        },
+        {
+          "word": "ข้อบังคับ",
+          "frequency": 76
+        },
+        {
+          "word": "คณะ",
+          "frequency": 75
+        },
+        {
+          "word": "สอบ",
+          "frequency": 73
+        },
+        {
+          "word": "พระนครเหนือ",
+          "frequency": 71
+        },
+        {
+          "word": "ลงโทษ",
+          "frequency": 69
+        },
+        {
+          "word": "งาน",
+          "frequency": 68
+        },
+        {
+          "word": "วินัย",
+          "frequency": 66
+        },
+        {
+          "word": "คณะกรรมการ",
+          "frequency": 65
+        },
+        {
+          "word": "ปกติ",
+          "frequency": 64
+        },
+        {
+          "word": "กรณี",
+          "frequency": 62
+        },
+        {
+          "word": "บาท",
+          "frequency": 60
+        },
+        {
+          "word": "ใด",
+          "frequency": 59
+        },
+        {
+          "word": "ระยะเวลา",
+          "frequency": 58
+        },
+        {
+          "word": "คะแนนเฉลี่ย",
+          "frequency": 57
+        },
+        {
+          "word": "ปริญญาตรี",
+          "frequency": 57
+        },
+        {
+          "word": "หมายความว่า",
+          "frequency": 56
+        },
+        {
+          "word": "ประกาศ",
+          "frequency": 55
+        },
+        {
+          "word": "สี",
+          "frequency": 55
+        },
+        {
+          "word": "พ.ศ.",
+          "frequency": 54
+        },
+        {
+          "word": "โอน",
+          "frequency": 54
+        },
+        {
+          "word": "ศึกษา",
+          "frequency": 54
+        },
+        {
+          "word": "อธิการบดี",
+          "frequency": 53
+        },
+        {
+          "word": "ก.",
+          "frequency": 51
+        },
+        {
+          "word": "อนุมัติ",
+          "frequency": 51
+        },
+        {
+          "word": "ผลการศึกษา",
+          "frequency": 48
+        },
+        {
+          "word": "คำสั่ง",
+          "frequency": 46
+        },
+        {
+          "word": "กําหนด",
+          "frequency": 43
+        },
+        {
+          "word": "คะแนน",
+          "frequency": 43
+        },
+        {
+          "word": "ลักษณะ",
+          "frequency": 43
+        },
+        {
+          "word": "ว่าด้วย",
+          "frequency": 42
+        },
+        {
+          "word": "พ้น",
+          "frequency": 40
+        },
+        {
+          "word": "เสื้อ",
+          "frequency": 39
+        },
+        {
+          "word": "ระเบียบ",
+          "frequency": 38
+        },
+        {
+          "word": "สถาบัน",
+          "frequency": 38
+        },
+        {
+          "word": "วันสุดท้าย",
+          "frequency": 37
+        },
+        {
+          "word": "คณบดี",
+          "frequency": 36
+        },
+        {
+          "word": "หมวด",
+          "frequency": 35
+        },
+        {
+          "word": "ต่ำกว่า",
+          "frequency": 35
+        },
+        {
+          "word": "พิจารณา",
+          "frequency": 35
+        },
+        {
+          "word": "บัณฑิต",
+          "frequency": 35
+        },
+        {
+          "word": "ข้อเท็จจริง",
+          "frequency": 35
+        },
+        {
+          "word": "แต่งกาย",
+          "frequency": 34
+        },
+        {
+          "word": "สุภาพ",
+          "frequency": 34
+        },
+        {
+          "word": "เพศ",
+          "frequency": 34
+        },
+        {
+          "word": "เทียบ",
+          "frequency": 33
+        },
+        {
+          "word": "แจ้ง",
+          "frequency": 33
+        },
+        {
+          "word": "เครื่องหมาย",
+          "frequency": 33
+        },
+        {
+          "word": "เวลา",
+          "frequency": 31
+        },
+        {
+          "word": "สะสม",
+          "frequency": 31
+        },
+        {
+          "word": "ภาควิชา",
+          "frequency": 31
+        },
+        {
+          "word": "ทางเพศ",
+          "frequency": 31
+        },
+        {
+          "word": "หอพัก",
+          "frequency": 31
+        },
+        {
+          "word": "ยื่น",
+          "frequency": 30
+        },
+        {
+          "word": "ฉบับ",
+          "frequency": 29
+        },
+        {
+          "word": "ดังนี้",
+          "frequency": 29
+        },
+        {
+          "word": "เงิน",
+          "frequency": 29
+        },
+        {
+          "word": "วิทยาลัย",
+          "frequency": 29
+        },
+        {
+          "word": "จํา",
+          "frequency": 29
+        },
+        {
+          "word": "ปริญญา",
+          "frequency": 29
+        },
+        {
+          "word": "สอบสวน",
+          "frequency": 29
+        },
+        {
+          "word": "อุทธรณ์",
+          "frequency": 29
+        },
+        {
+          "word": "ประกาศนียบัตร",
+          "frequency": 28
+        },
+        {
+          "word": "การพิจารณา",
+          "frequency": 28
+        },
+        {
+          "word": "เสนอ",
+          "frequency": 27
+        },
+        {
+          "word": "สำหรับ",
+          "frequency": 27
+        },
+        {
+          "word": "ขาว",
+          "frequency": 27
+        },
+        {
+          "word": "วิชาชีพ",
+          "frequency": 26
+        },
+        {
+          "word": "รักษา",
+          "frequency": 26
+        },
+        {
+          "word": "ชั้นปี",
+          "frequency": 26
+        },
+        {
+          "word": "ผิดวินัย",
+          "frequency": 26
+        },
+        {
+          "word": "ค่าธรรมเนียม",
+          "frequency": 25
+        },
+        {
+          "word": "สั่ง",
+          "frequency": 25
+        },
+        {
+          "word": "อาจารย์",
+          "frequency": 25
+        },
+        {
+          "word": "ลาพัก",
+          "frequency": 25
+        },
+        {
+          "word": "จันทร์",
+          "frequency": 25
+        },
+        {
+          "word": "ประ",
+          "frequency": 24
+        },
+        {
+          "word": "เจ้าหน้าที่",
+          "frequency": 24
+        },
+        {
+          "word": "ภาคเรียน",
+          "frequency": 23
+        },
+        {
+          "word": "หรับ",
+          "frequency": 23
+        },
+        {
+          "word": "ถอน",
+          "frequency": 23
+        },
+        {
+          "word": "อํา",
+          "frequency": 23
+        },
+        {
+          "word": "นวย",
+          "frequency": 23
+        },
+        {
+          "word": "ทำ",
+          "frequency": 23
+        }
+      ],
+      "top_20_keywords": [
+        "นักศึกษา",
+        "มหาวิทยาลัย",
+        "การศึกษา",
+        "ข้อ",
+        "ระดับ",
+        "ภาคการศึกษา",
+        "วิชา",
+        "ค่า",
+        "รายวิชา",
+        "เรียน",
+        "สภาพ",
+        "หลักสูตร",
+        "พระ",
+        "ลงทะเบียน",
+        "หน่วยกิต",
+        "เทคโนโลยี",
+        "จอมเกล้า",
+        "ข้อบังคับ",
+        "คณะ",
+        "สอบ"
+      ]
+    }
+  },
+  "summary": {
+    "total_files": 5,
+    "total_unique_keywords": 277,
+    "overall_top_keywords": [
+      {
+        "word": "หน่วยกิต",
+        "frequency": 807
+      },
+      {
+        "word": "นักศึกษา",
+        "frequency": 767
+      },
+      {
+        "word": "รายวิชา",
+        "frequency": 642
+      },
+      {
+        "word": "การศึกษา",
+        "frequency": 590
+      },
+      {
+        "word": "เรียน",
+        "frequency": 517
+      },
+      {
+        "word": "หลักสูตร",
+        "frequency": 475
+      },
+      {
+        "word": "เทคโนโลยี",
+        "frequency": 446
+      },
+      {
+        "word": "มหาวิทยาลัย",
+        "frequency": 386
+      },
+      {
+        "word": "วิชาบังคับ",
+        "frequency": 357
+      },
+      {
+        "word": "คำอธิบาย",
+        "frequency": 353
+      },
+      {
+        "word": "คอมพิวเตอร์",
+        "frequency": 302
+      },
+      {
+        "word": "วิชา",
+        "frequency": 285
+      },
+      {
+        "word": "ระดับ",
+        "frequency": 283
+      },
+      {
+        "word": "การสอน",
+        "frequency": 258
+      },
+      {
+        "word": "ภาคการศึกษา",
+        "frequency": 247
+      },
+      {
+        "word": "งาน",
+        "frequency": 235
+      },
+      {
+        "word": "พระ",
+        "frequency": 234
+      },
+      {
+        "word": "ระบบ",
+        "frequency": 227
+      },
+      {
+        "word": "ภาษาอังกฤษ",
+        "frequency": 223
+      },
+      {
+        "word": "จอมเกล้า",
+        "frequency": 221
+      },
+      {
+        "word": "ทักษะ",
+        "frequency": 205
+      },
+      {
+        "word": "ข้อ",
+        "frequency": 200
+      },
+      {
+        "word": "พระนครเหนือ",
+        "frequency": 187
+      },
+      {
+        "word": "การพัฒนา",
+        "frequency": 183
+      },
+      {
+        "word": "วิศวกรรมโยธา",
+        "frequency": 181
+      },
+      {
+        "word": "การเรียนรู้",
+        "frequency": 175
+      },
+      {
+        "word": "ออกแบบ",
+        "frequency": 173
+      },
+      {
+        "word": "สถาบัน",
+        "frequency": 171
+      },
+      {
+        "word": "ศึกษา",
+        "frequency": 167
+      },
+      {
+        "word": "development",
+        "frequency": 153
+      },
+      {
+        "word": "วิชาชีพ",
+        "frequency": 147
+      },
+      {
+        "word": "วิเคราะห์",
+        "frequency": 141
+      },
+      {
+        "word": "ผู้เรียน",
+        "frequency": 137
+      },
+      {
+        "word": "วิศวกรรม",
+        "frequency": 135
+      },
+      {
+        "word": "ฝึก",
+        "frequency": 132
+      },
+      {
+        "word": "management",
+        "frequency": 127
+      },
+      {
+        "word": "learning",
+        "frequency": 126
+      },
+      {
+        "word": "พัฒนา",
+        "frequency": 124
+      },
+      {
+        "word": "คณะ",
+        "frequency": 120
+      },
+      {
+        "word": "สำหรับ",
+        "frequency": 116
+      },
+      {
+        "word": "ครู",
+        "frequency": 116
+      },
+      {
+        "word": "เชิง",
+        "frequency": 115
+      },
+      {
+        "word": "ค่า",
+        "frequency": 114
+      },
+      {
+        "word": "นวัตกรรม",
+        "frequency": 111
+      },
+      {
+        "word": "ข้อมูล",
+        "frequency": 107
+      },
+      {
+        "word": "ความรู้",
+        "frequency": 107
+      },
+      {
+        "word": "การเรียน",
+        "frequency": 107
+      },
+      {
+        "word": "สร้าง",
+        "frequency": 104
+      },
+      {
+        "word": "ปี",
+        "frequency": 102
+      },
+      {
+        "word": "teaching",
+        "frequency": 102
+      },
+      {
+        "word": "บัณฑิต",
+        "frequency": 97
+      },
+      {
+        "word": "สภาพ",
+        "frequency": 97
+      },
+      {
+        "word": "หมวด",
+        "frequency": 95
+      },
+      {
+        "word": "กา",
+        "frequency": 92
+      },
+      {
+        "word": "ดังนี้",
+        "frequency": 88
+      },
+      {
+        "word": "โครงงาน",
+        "frequency": 88
+      },
+      {
+        "word": "system",
+        "frequency": 87
+      },
+      {
+        "word": "พ.ศ.",
+        "frequency": 87
+      },
+      {
+        "word": "โครงสร้าง",
+        "frequency": 86
+      },
+      {
+        "word": "ลงทะเบียน",
+        "frequency": 86
+      },
+      {
+        "word": "สำเร็จการศึกษา",
+        "frequency": 83
+      },
+      {
+        "word": "English",
+        "frequency": 82
+      },
+      {
+        "word": "สังคม",
+        "frequency": 82
+      },
+      {
+        "word": "ธุรกิจ",
+        "frequency": 80
+      },
+      {
+        "word": "Engineering",
+        "frequency": 79
+      },
+      {
+        "word": "ปริญญาตรี",
+        "frequency": 78
+      },
+      {
+        "word": "ประยุกต์ใช้",
+        "frequency": 77
+      },
+      {
+        "word": "ข้อบังคับ",
+        "frequency": 76
+      },
+      {
+        "word": "การทำงาน",
+        "frequency": 75
+      },
+      {
+        "word": "การสื่อสาร",
+        "frequency": 75
+      },
+      {
+        "word": "ประเทศ",
+        "frequency": 73
+      },
+      {
+        "word": "สอบ",
+        "frequency": 73
+      },
+      {
+        "word": "ดี",
+        "frequency": 72
+      },
+      {
+        "word": "ภาควิชา",
+        "frequency": 71
+      },
+      {
+        "word": "สถานศึกษา",
+        "frequency": 71
+      },
+      {
+        "word": "เบื้องต้น",
+        "frequency": 70
+      },
+      {
+        "word": "โปรแกรม",
+        "frequency": 70
+      },
+      {
+        "word": "โอน",
+        "frequency": 69
+      },
+      {
+        "word": "ลงโทษ",
+        "frequency": 69
+      },
+      {
+        "word": "แผน",
+        "frequency": 67
+      },
+      {
+        "word": "การเขียน",
+        "frequency": 66
+      },
+      {
+        "word": "วินัย",
+        "frequency": 66
+      },
+      {
+        "word": "พื้นฐาน",
+        "frequency": 65
+      },
+      {
+        "word": "คณะกรรมการ",
+        "frequency": 65
+      },
+      {
+        "word": "ปกติ",
+        "frequency": 64
+      },
+      {
+        "word": "เทคนิค",
+        "frequency": 63
+      },
+      {
+        "word": "หลักการ",
+        "frequency": 62
+      },
+      {
+        "word": "โยธา",
+        "frequency": 62
+      },
+      {
+        "word": "design",
+        "frequency": 62
+      },
+      {
+        "word": "กรณี",
+        "frequency": 62
+      },
+      {
+        "word": "ทำ",
+        "frequency": 61
+      },
+      {
+        "word": "data",
+        "frequency": 60
+      },
+      {
+        "word": "evaluation",
+        "frequency": 60
+      },
+      {
+        "word": "บาท",
+        "frequency": 60
+      },
+      {
+        "word": "analysis",
+        "frequency": 59
+      },
+      {
+        "word": "จำนวน",
+        "frequency": 59
+      },
+      {
+        "word": "ใด",
+        "frequency": 59
+      },
+      {
+        "word": "ระยะเวลา",
+        "frequency": 58
+      },
+      {
+        "word": "คะแนนเฉลี่ย",
+        "frequency": 57
+      },
+      {
+        "word": "skills",
+        "frequency": 56
+      }
+    ]
+  }
+}
