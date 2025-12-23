@@ -375,7 +375,8 @@ def init_chatbot():
         kb = HybridKnowledgeBase(
             persist_directory="./chroma_db",
             collection_name="chatbot_knowledge",
-            use_reranker=True
+            use_reranker=True,
+            use_keyword_boost=True
         )
         chatbot = TyphoonChatbot(api_key, kb, use_compression=False)
 
@@ -396,8 +397,9 @@ if 'last_contexts' not in st.session_state:
 
 # Default search settings (since sidebar is removed)
 n_results = 10
-bm25_weight = 0.4
-vector_weight = 0.6
+bm25_weight = 0.3
+vector_weight = 0.5
+keyword_weight = 0.2
 show_context = False
 
 # Header
@@ -516,7 +518,8 @@ if user_input:
             expanded_query,
             n_results=n_results,
             bm25_weight=bm25_weight,
-            vector_weight=vector_weight
+            vector_weight=vector_weight,
+            keyword_weight=keyword_weight
         )
 
     # Store contexts for this response
