@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-from chatbot_v03 import HybridKnowledgeBase, TyphoonChatbot
+from chatbot_v04_keywords import HybridKnowledgeBase, TyphoonChatbot
 import time
 import base64
 
