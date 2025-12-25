@@ -16,13 +16,14 @@ def get_base64_image(image_path):
 # Get base64 encoded images
 bg_image = get_base64_image("gb.jpg")
 bot_logo = get_base64_image("bot_4712206.png")
+hamburger_icon = get_base64_image("hamburger.svg")
 
 # Page configuration
 st.set_page_config(
     page_title="น้องบอท - ผู้ช่วยหลักสูตรคณะครุศาสตร์อุตสาหกรรม",
     page_icon="bot_4712206.png",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="auto"
 )
 
 # Custom CSS - Modern Green & White Theme with Kanit Font
@@ -63,18 +64,44 @@ st.markdown(f"""
         max-width: 1200px;
     }}
 
-    /* Hide Sidebar Completely */
+    /* Sidebar Background - Darker Green */
     [data-testid="stSidebar"] {{
-        display: none !important;
+        background: linear-gradient(180deg, #A7F3D0 0%, #D1FAE5 100%);
     }}
 
-    [data-testid="stSidebarNav"] {{
-        display: none !important;
+    [data-testid="stSidebar"] > div:first-child {{
+        background: linear-gradient(180deg, #A7F3D0 0%, #D1FAE5 100%);
     }}
 
-    /* Hide sidebar collapse button */
+    /* Enable Sidebar Toggle Button */
     button[kind="header"] {{
+        display: block !important;
+        color: #047857 !important;
+        padding: 0.5rem !important;
+        border-radius: 0.5rem !important;
+        transition: all 0.3s ease !important;
+    }}
+
+    /* Sidebar Toggle Button Styling */
+    button[kind="header"]:hover {{
+        background-color: rgba(16, 185, 129, 0.2) !important;
+        transform: scale(1.1);
+    }}
+
+    /* Replace default icon with custom hamburger icon */
+    button[kind="header"] svg {{
         display: none !important;
+    }}
+
+    button[kind="header"]::before {{
+        content: '';
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url('data:image/svg+xml;base64,{hamburger_icon}');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }}
 
     /* Header Styling with Shadow */
@@ -215,7 +242,7 @@ st.markdown(f"""
     /* Button Styling - Modern with Gradient */
     .stButton > button {{
         background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
-        color: white !important;
+        color: #FFFFFF !important;
         border: none !important;
         border-radius: 0.75rem !important;
         padding: 0.85rem 1.75rem !important;
@@ -224,6 +251,11 @@ st.markdown(f"""
         transition: all 0.3s ease !important;
         box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3) !important;
         letter-spacing: 0.5px;
+    }}
+
+    /* Ensure button text is white */
+    .stButton > button * {{
+        color: #FFFFFF !important;
     }}
 
     .stButton > button:hover {{
@@ -395,19 +427,58 @@ if 'show_context' not in st.session_state:
 if 'last_contexts' not in st.session_state:
     st.session_state.last_contexts = []
 
-# Default search settings (since sidebar is removed)
+# Default search settings
 n_results = 10
 bm25_weight = 0.3
 vector_weight = 0.5
 keyword_weight = 0.2
 show_context = False
 
+# Sidebar Configuration
+with st.sidebar:
+    st.markdown("### 🤖 น้องบอท")
+    st.markdown('<p style="color: #047857; font-size: 0.95rem;">ผู้ช่วยให้คำปรึกษาหลักสูตร<br>คณะครุศาสตร์อุตสาหกรรม มจพ.</p>', unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # Clear history button
+    if st.button("🗑️ ล้างประวัติการสนทนา", use_container_width=True):
+        st.session_state.messages = []
+        chatbot.clear_history()
+        st.session_state.last_contexts = []
+        st.rerun()
+
+    st.markdown("---")
+
+    # Contact information
+    st.markdown("### 📞 ติดต่อสอบถาม")
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%); padding: 1.25rem; border-radius: 0.75rem; border: 2px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);">
+        <span style="color: #1F2937; line-height: 2;">
+        📧 <a href="http://admission.kmutnb.ac.th" style="color: #059669; text-decoration: none; font-weight: 500;">admission.kmutnb.ac.th</a><br>
+        ☎️ <span style="font-weight: 500;">02-555-2000</span><br>
+        📘 <span style="font-weight: 500;">คณะครุศาสตร์อุตสาหกรรม</span>
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # Footer - Copyright
+    st.markdown("""
+    <div style="text-align: center; color: #6B7280; font-size: 0.85rem; padding: 1.5rem 0.5rem; border-top: 2px solid #D1FAE5; margin-top: 2rem;">
+        <strong style="color: #047857; font-size: 0.9rem;">พัฒนาโดย</strong><br>
+        <span style="color: #1F2937; line-height: 1.8;">คณะครุศาสตร์อุตสาหกรรม<br>มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</span><br><br>
+        <span style="font-size: 0.8rem; color: #9CA3AF;">© 2025 KMUTNB. All rights reserved.</span>
+    </div>
+    """, unsafe_allow_html=True)
+
 # Header
 st.markdown(f'<div class="main-header"><img src="data:image/png;base64,{bot_logo}" style="width: 80px; height: 80px; vertical-align: middle; margin-right: 15px;"> น้องบอท</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">ผู้ช่วยให้คำปรึกษาหลักสูตร คณะครุศาสตร์อุตสาหกรรม มจพ.</div>', unsafe_allow_html=True)
 
 # Main chat area
-st.markdown("### 💬 พื้นที่แชท")
+st.markdown('<h3 style="color: #000000; font-weight: 600; font-size: 1.5rem; margin-bottom: 1rem;">💬 พื้นที่แชท</h3>', unsafe_allow_html=True)
 
 # Display chat messages
 for i, message in enumerate(st.session_state.messages):
@@ -443,67 +514,8 @@ for i, message in enumerate(st.session_state.messages):
                         """)
                         st.markdown("---")
 
-# Suggested questions section
-st.markdown("---")
-st.markdown("""
-<div style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); padding: 1.5rem; border-radius: 0.75rem; border: 2px solid #D1FAE5; margin-bottom: 1.5rem;">
-    <h4 style="color: #047857; margin-bottom: 1rem; font-size: 1.1rem;">💡 ตัวอย่างคำถามที่คุณสามารถถามได้:</h4>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem;">
-        <div style="background-color: #FFFFFF; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #10B981; color: #1F2937; font-size: 0.9rem;">
-            📚 หลักสูตรวิศวกรรมโยธาและการศึกษาเรียนกี่ปี
-        </div>
-        <div style="background-color: #FFFFFF; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #10B981; color: #1F2937; font-size: 0.9rem;">
-            📝 คุณสมบัติการสมัครเรียนมีอะไรบ้าง
-        </div>
-        <div style="background-color: #FFFFFF; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #10B981; color: #1F2937; font-size: 0.9rem;">
-            💼 จบแล้วทำงานอะไรได้บ้าง
-        </div>
-        <div style="background-color: #FFFFFF; padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #10B981; color: #1F2937; font-size: 0.9rem;">
-            🎓 มีวิชาอะไรบ้างในปี 1
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
 # Chat input with enhanced styling
 user_input = st.chat_input("✨ พิมพ์คำถามของคุณที่นี่... (กด Enter เพื่อส่ง)")
-
-# Footer - Moved below chat input
-st.markdown("---")
-
-# Footer content with clear button and contact info
-col1, col2 = st.columns([1, 2])
-
-with col1:
-    # Clear history button
-    if st.button("🗑️ ล้างประวัติการสนทนา", use_container_width=True):
-        st.session_state.messages = []
-        chatbot.clear_history()
-        st.session_state.last_contexts = []
-        st.rerun()
-
-with col2:
-    # Contact box
-    st.markdown("""
-    <div style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); padding: 1.25rem; border-radius: 0.75rem; border: 2px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);">
-        <strong style="color: #047857; font-size: 1.05rem;">📞 ติดต่อสอบถาม</strong><br><br>
-        <span style="color: #1F2937; line-height: 1.8;">
-        📧 <a href="http://admission.kmutnb.ac.th" style="color: #059669; text-decoration: none; font-weight: 500;">admission.kmutnb.ac.th</a><br>
-        ☎️ <span style="font-weight: 500;">02-555-2000</span><br>
-        📘 คณะครุศาสตร์อุตสาหกรรม มจพ.
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Copyright
-st.markdown("""
-<div style="text-align: center; color: #6B7280; font-size: 0.9rem; padding: 1.5rem 0; border-top: 2px solid #D1FAE5; margin-top: 2rem;">
-    <strong style="color: #047857;">พัฒนาโดย คณะครุศาสตร์อุตสาหกรรม มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ</strong><br>
-    <span style="font-size: 0.85rem;">© 2025 KMUTNB. All rights reserved.</span>
-</div>
-""", unsafe_allow_html=True)
 
 if user_input:
     # Add user message to chat

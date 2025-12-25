@@ -1,0 +1,23 @@
+# RAGAS Evaluation Dependencies
+# Install with: pip install -r requirements_ragas.txt
+
+# Core RAGAS library
+ragas>=0.1.0
+
+# LangChain dependencies for RAGAS
+langchain>=0.1.0
+langchain-openai>=0.0.5
+
+# OpenAI (required by RAGAS for evaluation)
+openai>=1.0.0
+
+# Data handling
+datasets>=2.14.0
+pandas>=2.0.0
+
+# Already required by your chatbot (include for completeness)
+python-dotenv>=1.0.0
+sentence-transformers>=2.2.0
+chromadb>=0.4.0
+rank-bm25>=0.2.2
+pythainlp>=4.0.0
