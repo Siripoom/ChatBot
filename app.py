@@ -145,20 +145,26 @@ st.markdown(f"""
         transform: translateY(-2px);
     }}
 
-    /* User Message - Clean White Design */
+    /* User Message - Clean White Design - Right Aligned */
     .user-message {{
         background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
-        border-left: 5px solid #10B981;
+        border-right: 5px solid #10B981;
         border: 2px solid #D1FAE5;
         color: #1F2937;
+        margin-left: 15%;
+        align-items: flex-end;
+        text-align: right;
     }}
 
-    /* Bot Message - Soft Green Background */
+    /* Bot Message - Soft Green Background - Left Aligned */
     .bot-message {{
         background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%);
         border-left: 5px solid #059669;
         border: 1px solid #D1FAE5;
         color: #1F2937;
+        margin-right: 15%;
+        align-items: flex-start;
+        text-align: left;
     }}
 
     /* Message Labels */

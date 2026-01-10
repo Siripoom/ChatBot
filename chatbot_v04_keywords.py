@@ -581,19 +581,36 @@ class TyphoonChatbot:
 
         return prompt
 
-    def chat(self, user_input: str) -> str:
-        """Process user input and return chatbot response"""
+    def chat(self, user_input: str, max_history_turns: int = 3) -> str:
+        """
+        Process user input and return chatbot response with conversation memory
+
+        Args:
+            user_input: User's question
+            max_history_turns: Maximum number of previous conversation turns to include (default: 3)
+        """
         try:
             # Create prompt with knowledge base context
             prompt = self.create_prompt(user_input)
 
+            # Build messages with conversation history
+            messages = [
+                {"role": "system", "content": "You are a helpful assistant. You must answer only in Thai."}
+            ]
+
+            # Add recent conversation history (limited to max_history_turns)
+            recent_history = self.conversation_history[-max_history_turns:] if self.conversation_history else []
+            for conv in recent_history:
+                messages.append({"role": "user", "content": conv["user"]})
+                messages.append({"role": "assistant", "content": conv["bot"]})
+
+            # Add current question with RAG context
+            messages.append({"role": "user", "content": prompt})
+
             # Generate response using Typhoon
             response = self.client.chat.completions.create(
                 model="typhoon-v2.1-12b-instruct",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant. You must answer only in Thai."},
-                    {"role": "user", "content": prompt}
-                ],
+                messages=messages,
                 max_tokens=4096,
                 temperature=0.6
             )
