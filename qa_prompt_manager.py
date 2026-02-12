@@ -8,6 +8,8 @@ import numpy as np
 from pythainlp.corpus import thai_stopwords
 from pythainlp.tokenize import word_tokenize
 
+from query_normalizer import QueryNormalizer
+
 
 class QAPromptManager:
     """Manage QA prompt data from Excel and provide semantic + keyword matching."""
@@ -22,17 +24,22 @@ class QAPromptManager:
         json_path: str = "./data/qa_prompt.json",
         embedding_model: Optional[Any] = None,
         match_threshold: float = 0.50,
+        match_min_gap: float = 0.06,
+        synonym_path: str = "./data/query_synonyms.json",
     ):
         self.excel_path = Path(excel_path)
         self.json_path = Path(json_path)
         self.embedding_model = embedding_model
         self.match_threshold = match_threshold
+        self.match_min_gap = match_min_gap
+        self.query_normalizer = QueryNormalizer(synonym_path=synonym_path)
 
         self._stopwords = set(thai_stopwords())
         self._items: List[Dict[str, Any]] = []
         self._answered_items: List[Dict[str, Any]] = []
         self._answered_embeddings: Optional[np.ndarray] = None
         self._answered_tokens: List[set[str]] = []
+        self._answered_canonicals: List[set[str]] = []
         self._index_ready = False
 
     def sync_from_excel(self, force: bool = False, preserve_answers: bool = True) -> Dict[str, Any]:
@@ -79,45 +86,103 @@ class QAPromptManager:
         if self.embedding_model is None:
             return None
 
-        variants = [query.strip()]
-        if expanded_query and expanded_query.strip() and expanded_query.strip() != variants[0]:
-            variants.append(expanded_query.strip())
+        normalized_query_result = self.query_normalizer.normalize_query(query.strip())
+        normalized_query = normalized_query_result["normalized_text"]
 
-        variant_embeddings = self.embedding_model.encode(variants, normalize_embeddings=True)
-        variant_tokens = [self._tokenize(text) for text in variants]
+        variants: List[Dict[str, Any]] = []
+        seen_variant_texts = set()
 
-        best_match: Optional[Dict[str, Any]] = None
+        def add_variant(raw_text: str) -> None:
+            raw_text = raw_text.strip()
+            if not raw_text:
+                return
+            variant_result = self.query_normalizer.normalize_query(raw_text)
+            normalized_text = variant_result["normalized_text"]
+            if not normalized_text or normalized_text in seen_variant_texts:
+                return
+            seen_variant_texts.add(normalized_text)
+            variants.append(
+                {
+                    "raw_text": raw_text,
+                    "normalized_text": normalized_text,
+                    "matched_canonicals": variant_result["matched_canonicals"],
+                }
+            )
+
+        add_variant(query)
+        if normalized_query:
+            add_variant(normalized_query)
+
+        if expanded_query and expanded_query.strip():
+            add_variant(expanded_query)
+
+        if normalized_query_result["matched_canonicals"]:
+            enriched_query = f"{normalized_query} {' '.join(normalized_query_result['matched_canonicals'])}".strip()
+            add_variant(enriched_query)
+
+        if not variants:
+            return None
+
+        variant_embeddings = self.embedding_model.encode(
+            [variant["normalized_text"] for variant in variants],
+            normalize_embeddings=True,
+        )
+        variant_tokens = [self._tokenize(variant["normalized_text"]) for variant in variants]
+        variant_canonicals = [set(variant["matched_canonicals"]) for variant in variants]
+        scored_candidates: List[Dict[str, Any]] = []
 
         for idx, item in enumerate(self._answered_items):
-            item_best_score = 0.0
+            item_best_score = -1.0
             item_best_semantic = 0.0
             item_best_keyword = 0.0
-            item_best_variant = variants[0]
+            item_best_variant = variants[0]["raw_text"]
+            item_best_canonicals: List[str] = []
 
-            for variant_idx, variant_text in enumerate(variants):
+            for variant_idx, variant in enumerate(variants):
                 semantic_score = float(np.dot(self._answered_embeddings[idx], variant_embeddings[variant_idx]))
                 keyword_score = self._keyword_overlap(variant_tokens[variant_idx], self._answered_tokens[idx])
+                canonical_score = self._canonical_overlap(
+                    variant_canonicals[variant_idx],
+                    self._answered_canonicals[idx],
+                )
                 combined_score = (0.7 * semantic_score) + (0.3 * keyword_score)
+                combined_score = min(1.0, combined_score + (0.05 * canonical_score))
 
                 if combined_score > item_best_score:
                     item_best_score = combined_score
                     item_best_semantic = semantic_score
                     item_best_keyword = keyword_score
-                    item_best_variant = variant_text
-
-            if item_best_score < self.match_threshold:
-                continue
+                    item_best_variant = variant["raw_text"]
+                    item_best_canonicals = variant["matched_canonicals"]
 
             candidate = dict(item)
             candidate["semantic_score"] = item_best_semantic
             candidate["keyword_score"] = item_best_keyword
             candidate["combined_score"] = item_best_score
             candidate["matched_variant"] = item_best_variant
+            candidate["matched_canonicals"] = item_best_canonicals
+            scored_candidates.append(candidate)
 
-            if best_match is None or candidate["combined_score"] > best_match["combined_score"]:
-                best_match = candidate
+        if not scored_candidates:
+            return None
 
-        return best_match
+        ranked_candidates = sorted(
+            scored_candidates,
+            key=lambda candidate: candidate["combined_score"],
+            reverse=True,
+        )
+        top_candidate = ranked_candidates[0]
+        second_score = ranked_candidates[1]["combined_score"] if len(ranked_candidates) > 1 else 0.0
+        score_gap = top_candidate["combined_score"] - second_score
+
+        if top_candidate["combined_score"] < self.match_threshold:
+            return None
+        if score_gap < self.match_min_gap:
+            return None
+
+        top_candidate["score_gap"] = score_gap
+        top_candidate["normalized_query"] = normalized_query
+        return top_candidate
 
     def _should_sync(self) -> bool:
         """Return True when JSON missing or Excel has newer mtime."""
@@ -231,6 +296,7 @@ class QAPromptManager:
             self._answered_items = []
             self._answered_embeddings = None
             self._answered_tokens = []
+            self._answered_canonicals = []
             self._index_ready = True
             return
         if not self._items:
@@ -240,12 +306,24 @@ class QAPromptManager:
         if not self._answered_items:
             self._answered_embeddings = None
             self._answered_tokens = []
+            self._answered_canonicals = []
             self._index_ready = True
             return
 
-        questions = [item["question"] for item in self._answered_items]
-        self._answered_embeddings = self.embedding_model.encode(questions, normalize_embeddings=True)
-        self._answered_tokens = [self._tokenize(question) for question in questions]
+        normalized_questions: List[str] = []
+        self._answered_tokens = []
+        self._answered_canonicals = []
+        for item in self._answered_items:
+            normalized_result = self.query_normalizer.normalize_query(item["question"])
+            normalized_question = normalized_result["normalized_text"] or self._normalize_question(item["question"])
+            normalized_questions.append(normalized_question)
+            self._answered_tokens.append(self._tokenize(normalized_question))
+            self._answered_canonicals.append(set(normalized_result["matched_canonicals"]))
+
+        self._answered_embeddings = self.embedding_model.encode(
+            normalized_questions,
+            normalize_embeddings=True,
+        )
         self._index_ready = True
 
     def _tokenize(self, text: str) -> set[str]:
@@ -267,6 +345,12 @@ class QAPromptManager:
         if not query_tokens:
             return 0.0
         return len(query_tokens.intersection(question_tokens)) / len(query_tokens)
+
+    @staticmethod
+    def _canonical_overlap(query_canonicals: set[str], question_canonicals: set[str]) -> float:
+        if not query_canonicals:
+            return 0.0
+        return len(query_canonicals.intersection(question_canonicals)) / len(query_canonicals)
 
     @staticmethod
     def _clean_cell(value: Any) -> str:

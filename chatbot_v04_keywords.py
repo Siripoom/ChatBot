@@ -8,16 +8,19 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from rank_bm25 import BM25Okapi
 from pythainlp.tokenize import word_tokenize
 from qa_prompt_manager import QAPromptManager
+from query_normalizer import QueryNormalizer
 
 class HybridKnowledgeBase:
     """Class to handle hybrid retrieval (BM25 + Vector Search + Keyword Matching)"""
 
     def __init__(self, persist_directory: str = "./chroma_db", collection_name: str = "chatbot_knowledge",
-                 use_reranker: bool = True, use_keyword_boost: bool = True):
+                 use_reranker: bool = True, use_keyword_boost: bool = True,
+                 synonym_path: str = "./data/query_synonyms.json"):
         self.persist_directory = persist_directory
         self.collection_name = collection_name
         self.use_reranker = use_reranker
         self.use_keyword_boost = use_keyword_boost
+        self.query_normalizer = QueryNormalizer(synonym_path=synonym_path)
 
         # Initialize the embedding model
         print("🤖 Loading embedding model...")
@@ -62,6 +65,10 @@ class HybridKnowledgeBase:
         print("🔍 Building BM25 index...")
         self.bm25 = BM25Okapi(self.tokenized_docs)
         print(f"✅ BM25 index ready with {len(self.documents)} documents")
+
+    def normalize_query(self, query: str) -> Dict[str, Any]:
+        """Normalize query text and apply configured synonym aliases."""
+        return self.query_normalizer.normalize_query(query)
 
     def _extract_query_keywords(self, query: str, top_n: int = 10) -> List[str]:
         """
@@ -247,12 +254,15 @@ class HybridKnowledgeBase:
         Returns:
             List of relevant knowledge items with text and relevance score
         """
+        normalization_result = self.normalize_query(query)
+        normalized_query = normalization_result["normalized_text"] or query
+
         # สกัด keywords จาก query
-        query_keywords = self._extract_query_keywords(query, top_n=15)
+        query_keywords = self._extract_query_keywords(normalized_query, top_n=15)
 
         # Perform both searches
-        bm25_results = self._bm25_search(query, top_k=15)
-        vector_results = self._vector_search(query, top_k=15)
+        bm25_results = self._bm25_search(normalized_query, top_k=15)
+        vector_results = self._vector_search(normalized_query, top_k=15)
         vector_raw_scores: Dict[int, float] = {}
         for idx, raw_score in vector_results:
             # keep strongest raw similarity when duplicate idx exists
@@ -322,12 +332,14 @@ class HybridKnowledgeBase:
                 'max_raw_vector_similarity': global_max_raw_vector_similarity,
                 'keyword_score': keyword_scores.get(idx, 0.0),
                 'metadata': self.metadatas[idx] if idx < len(self.metadatas) else {},
-                'matched_keywords': self._get_matched_keywords(query_keywords, self.metadatas[idx]) if idx < len(self.metadatas) else []
+                'matched_keywords': self._get_matched_keywords(query_keywords, self.metadatas[idx]) if idx < len(self.metadatas) else [],
+                'normalized_query': normalized_query,
+                'matched_canonicals': normalization_result.get("matched_canonicals", []),
             })
 
         # Apply re-ranking if enabled
         if self.use_reranker and relevant_knowledge:
-            relevant_knowledge = self._rerank(query, relevant_knowledge, top_k=n_results)
+            relevant_knowledge = self._rerank(normalized_query, relevant_knowledge, top_k=n_results)
         else:
             relevant_knowledge = relevant_knowledge[:n_results]
 
@@ -375,7 +387,9 @@ class TyphoonChatbot:
                  qa_excel_path: str = "./data/QA.xlsx",
                  qa_json_path: str = "./data/qa_prompt.json",
                  vector_fallback_threshold: float = 0.09,
-                 qa_match_threshold: float = 0.50):
+                 qa_match_threshold: float = 0.50,
+                 qa_match_min_gap: float = 0.06,
+                 synonym_path: str = "./data/query_synonyms.json"):
         self.api_key = api_key
         self.knowledge_base = knowledge_base
         self.use_compression = use_compression
@@ -394,6 +408,8 @@ class TyphoonChatbot:
                 json_path=qa_json_path,
                 embedding_model=self.knowledge_base.model,
                 match_threshold=qa_match_threshold,
+                match_min_gap=qa_match_min_gap,
+                synonym_path=synonym_path,
             )
             sync_result = self.qa_manager.sync_from_excel(preserve_answers=True)
             status = "updated" if sync_result["updated"] else "loaded"
@@ -599,7 +615,9 @@ class TyphoonChatbot:
 
     def _prepare_prompt_context(self, user_question: str) -> str:
         """Prepare retrieval context and routing metadata before generating prompt."""
-        expanded_query = self.expand_query(user_question)
+        normalized_user_query_result = self.knowledge_base.normalize_query(user_question)
+        normalized_user_query = normalized_user_query_result["normalized_text"] or user_question
+        expanded_query = self.expand_query(normalized_user_query)
         qa_match: Optional[Dict[str, Any]] = None
         if self.qa_manager:
             try:
@@ -620,11 +638,15 @@ class TyphoonChatbot:
         )
 
         self.last_routing_info = {
+            "normalized_query": normalized_user_query,
             "expanded_query": expanded_query,
             "max_raw_vector_similarity": max_raw_vector_similarity,
             "vector_fallback_threshold": self.vector_fallback_threshold,
             "used_source": "vector_only",
             "qa_match_found": bool(qa_match),
+            "qa_score_gap": qa_match.get("score_gap", 0.0) if qa_match else 0.0,
+            "qa_gate_passed": bool(qa_match),
+            "matched_canonicals": normalized_user_query_result.get("matched_canonicals", []),
         }
 
         if qa_match and relevant_knowledge:
